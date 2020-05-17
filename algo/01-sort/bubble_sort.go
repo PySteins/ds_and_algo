@@ -24,9 +24,9 @@ func (b *BubbleSort) Sort(raw []interface{}) {
 		// 默认
 		l := len(b.array) - 1
 		for l > 0 {
-			for i := 1; i <= l; i++ {
-				if b.compare(i-1, i) > 0 {
-					b.swap(i-1, i)
+			for begin := 1; begin <= l; begin++ {
+				if b.compare(begin-1, begin) > 0 {
+					b.swap(begin-1, begin)
 				}
 			}
 			l--
@@ -36,9 +36,9 @@ func (b *BubbleSort) Sort(raw []interface{}) {
 		l := len(b.array) - 1
 		for l > 0 {
 			sorted := true
-			for i := 1; i <= l; i++ {
-				if b.compare(i-1, i) > 0 {
-					b.swap(i-1, i)
+			for begin := 1; begin <= l; begin++ {
+				if b.compare(begin-1, begin) > 0 {
+					b.swap(begin-1, begin)
 					sorted = false
 				}
 			}
@@ -52,10 +52,10 @@ func (b *BubbleSort) Sort(raw []interface{}) {
 		l := len(b.array) - 1
 		for l > 0 {
 			var sortedIndex int
-			for i := 1; i <= l; i++ {
-				if b.compare(i-1, i) > 0 {
-					b.swap(i-1, i)
-					sortedIndex = i
+			for begin := 1; begin <= l; begin++ {
+				if b.compare(begin-1, begin) > 0 {
+					b.swap(begin-1, begin)
+					sortedIndex = begin
 				}
 			}
 			l = sortedIndex

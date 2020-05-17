@@ -21,8 +21,8 @@ func (h *HeapSort) Sort(raw []interface{}) {
 	}
 	// 最后一个非叶子节点开始下虑
 	last := (h.heapSize >> 1) - 1
-	for i := last; i >= 0; i-- {
-		h.siftDown(i)
+	for begin := last; begin >= 0; begin-- {
+		h.siftDown(begin)
 	}
 	for h.heapSize > 1 {
 		h.swap(0, h.heapSize-1)

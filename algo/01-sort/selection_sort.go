@@ -19,9 +19,9 @@ func (s *SelectionSort) Sort(raw []interface{}) {
 	l := len(s.array) - 1
 	for l > 0 {
 		var maxIndex int
-		for i := 1; i <= l; i++ {
-			if s.compare(maxIndex, i) <= 0 {
-				maxIndex = i
+		for begin := 1; begin <= l; begin++ {
+			if s.compare(maxIndex, begin) <= 0 {
+				maxIndex = begin
 			}
 		}
 		s.swap(maxIndex, l)
