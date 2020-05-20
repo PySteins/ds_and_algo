@@ -1,19 +1,23 @@
 package _01_sort
 
-import "github.com/gogf/gf/util/gutil"
+import (
+	"fmt"
+	s "sort"
+
+	"github.com/gogf/gf/util/gconv"
+
+	"github.com/gogf/gf/os/gtime"
+
+	"github.com/gogf/gf/util/grand"
+	"github.com/gogf/gf/util/gutil"
+)
 
 type ISort interface {
 	Sort([]interface{})
 	compare(i1, i2 int) int
 	swap(i1, i2 int)
-}
-
-type array []interface{}
-
-func (a array) copy() (new []interface{}) {
-	new = make([]interface{}, len(a))
-	copy(new, a)
-	return
+	compareElement(v1, v2 interface{}) int
+	operation() (int, int)
 }
 
 type sort struct {
@@ -47,4 +51,38 @@ func (s *sort) swap(i1, i2 int) {
 	tmp := s.array[i1]
 	s.array[i1] = s.array[i2]
 	s.array[i2] = tmp
+}
+
+func (s *sort) compareElement(v1, v2 interface{}) int {
+	s.cmpCount++
+	return s.comparator(v1, v2)
+}
+
+func (s *sort) operation() (int, int) {
+	return s.cmpCount, s.swapCount
+}
+
+func GetTestSample(min, max, num int) (array []interface{}, sorted []interface{}) {
+	array = make([]interface{}, num)
+	for i := 0; i < num; i++ {
+		array[i] = grand.N(min, max)
+	}
+	sorted = make([]interface{}, num)
+	copy(sorted, array)
+	tmp := gconv.SliceInt(sorted)
+	s.Ints(tmp)
+	sorted = gconv.SliceAny(tmp)
+	return
+}
+
+func DoSort(name string, sortType ISort, raw []interface{}) {
+	fmt.Println(name, "===========")
+	start := gtime.TimestampMilli()
+	sortType.Sort(raw)
+	fmt.Println("time spent:", gtime.TimestampMilli()-start, "ms")
+	compare, swap := sortType.operation()
+	fmt.Println("compare times:", compare, "次")
+	fmt.Println("swap times:   ", swap, "次")
+	fmt.Println("==================")
+
 }

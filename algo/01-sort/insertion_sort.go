@@ -57,11 +57,6 @@ func (i *InsertionSort) Sort(raw []interface{}) {
 	}
 }
 
-func (i *InsertionSort) compareElement(v1, v2 interface{}) int {
-	i.cmpCount++
-	return i.comparator(v1, v2)
-}
-
 func (i *InsertionSort) BinarySearch(endIndex int) int {
 	begin := 0
 	end := endIndex

@@ -9,9 +9,9 @@ type HeapSort struct {
 	heapSize int
 }
 
-func NewHeapSort(comparator gutil.Comparator) *SelectionSort {
-	return &SelectionSort{
-		NewSort(comparator),
+func NewHeapSort(comparator gutil.Comparator) *HeapSort {
+	return &HeapSort{
+		sort: NewSort(comparator),
 	}
 }
 
@@ -19,6 +19,7 @@ func (h *HeapSort) Sort(raw []interface{}) {
 	if !h.check(raw) {
 		return
 	}
+	h.heapSize = len(raw)
 	// 最后一个非叶子节点开始下虑
 	last := (h.heapSize >> 1) - 1
 	for begin := last; begin >= 0; begin-- {
@@ -43,12 +44,12 @@ func (h *HeapSort) siftDown(index int) {
 		// 优先使用左节点
 		childIndex := leftIndex
 		child := h.array[childIndex]
-		if (rightIndex < h.heapSize) && (h.comparator(h.array[rightIndex], child) > 0) {
+		if (rightIndex < h.heapSize) && (h.compareElement(h.array[rightIndex], child) > 0) {
 			// 右子节点存在且比较大
 			childIndex = rightIndex
 			child = h.array[childIndex]
 		}
-		if h.comparator(e, child) >= 0 {
+		if h.compareElement(e, child) >= 0 {
 			break
 		}
 
